@@ -3,9 +3,9 @@ FROM golang:1.15 as builder
 
 # don't place it into $GOPATH/bin because Drone mounts $GOPATH as volume
 RUN ls -l
-WORKDIR src
+RUN go get github.com/golangci/golangci-lint/cmd/golangci-lint
 RUN ls -l
-WORKDIR src/golangci-lint
+WORKDIR $GOPATH/src/golangci-lint
 #WORKDIR $GOPATH/src/golangci-lint
 RUN ls -l
 RUN go build -o /usr/bin/golangci-lint ./cmd/golangci-lint/main.go
